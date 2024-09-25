@@ -1,0 +1,7 @@
+---
+- name: Install npm and Node.js
+  apt:
+    name:
+      - nodejs
+      - npm
+    state: present
