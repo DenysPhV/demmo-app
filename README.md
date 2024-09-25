@@ -29,9 +29,12 @@ demmo-app/
 │   ├── ec2-backend.tf
 │   ├── ec2-frontend.tf
 │   ├── main.tf
+│   ├── network.tf
 │   ├── outputs.tf     
 │   ├── providers.tf 
+│   ├── route53.tf
 │   ├── s3.tf 
+│   ├── security-groups.tf
 │   └── variables.tf
 │
 └── README.md
