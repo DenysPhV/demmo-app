@@ -1,0 +1,37 @@
+# playbook.yml для React
+---
+- hosts: frontend
+  become: true
+  tasks:
+    - name: Add repo Node.js
+      apt_repository:
+        repo: 'deb https://deb.nodesource.com/node_16.x focal main'
+        state: present
+        filename: 'nodesource'
+
+    - name: Update cache APT
+      apt:
+        update_cache: yes
+
+    - name: Install Node.js for to building React
+      apt:
+        name: nodejs
+        state: present
+
+    - name: copy frontend's files
+      copy:
+        src: ./frontend/
+        dest: /var/www/frontend/
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Install npm dependencies
+      command: npm install
+      args:
+        chdir: /var/www/frontend/
+
+    - name: Build React app
+      command: npm run build
+      args:
+        chdir: /var/www/frontend/

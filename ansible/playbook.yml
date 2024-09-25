@@ -1,0 +1,42 @@
+---
+- hosts: backend
+  become: true
+  tasks:
+    - name: Встановлення Node.js
+      apt:
+        name: nodejs
+        state: present
+    - name: Копіювання файлів бекенду
+      copy:
+        src: ./backend/
+        dest: /var/www/backend/
+
+- hosts: frontend
+  become: true
+  tasks:
+    - name: Встановлення Node.js для React
+      apt:
+        name: nodejs
+        state: present
+    - name: Копіювання файлів фронтенду
+      copy:
+        src: ./frontend/
+        dest: /var/www/frontend/
+
+- hosts: all
+  become: true
+  tasks:
+    - name: Node Exporter
+      apt:
+        name: node_exporter
+        state: present
+
+    - name: Prometheus
+      apt:
+        name: prometheus
+        state: present
+
+    - name: Grafana
+      apt:
+        name: grafana
+        state: present
