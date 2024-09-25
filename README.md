@@ -1,6 +1,6 @@
 # demmo-app
 
-[demo-app.jpg](image%2Fdemo-app.jpg)
+![demo-app](https://github.com/user-attachments/assets/88ba8e3c-0121-415d-9190-dd34fbcc3342)
 
 ```commandline
 demmo-app/
