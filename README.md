@@ -2,7 +2,7 @@
 
 ![demo-app](https://github.com/user-attachments/assets/88ba8e3c-0121-415d-9190-dd34fbcc3342)
 
-```commandline
+```
 demmo-app/
 │
 ├── backend/                     # Clone from github
@@ -31,11 +31,13 @@ demmo-app/
 │   ├── main.tf
 │   ├── network.tf
 │   ├── outputs.tf     
-│   ├── providers.tf 
 │   ├── route53.tf
+│   ├── routes.tf
 │   ├── s3.tf 
 │   ├── security-groups.tf
-│   └── variables.tf
+│   ├── state_lock_table.tf
+│   ├── variables.tf 
+│   └── versions.tf
 │
 └── README.md
 ```
