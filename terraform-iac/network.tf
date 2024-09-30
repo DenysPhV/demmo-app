@@ -1,43 +1,83 @@
-resource "aws_vpc" "main_vpc" {
+resource "aws_vpc" "mindlab-vpc" {
   cidr_block = "10.0.0.0/16"
-
+  enable_dns_hostnames = true
+  enable_dns_support = true
+  lifecycle {
+    prevent_destroy = true
+  }
   tags = {
-    Name = "MainVPC"
+    Name = "mindlab-vpc"
   }
 }
 
-resource "aws_subnet" "main_subnet" {
-  vpc_id = aws_vpc.main_vpc.id
-  cidr_block = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
+
+
+# public subnet resources
+resource "aws_subnet" "public_subnets" {
+  count      = length(var.public_subnet_cidrs)
+  vpc_id     = aws_vpc.mindlab-vpc.id
+  cidr_block = element(var.public_subnet_cidrs, count.index)
+  availability_zone = element(var.azs, count.index)
+  # DNS and public
+  #  enable_dns64 = true
+  enable_resource_name_dns_a_record_on_launch = true
+  #  enable_resource_name_dns_aaaa_record_on_launch = true
+  map_public_ip_on_launch = true
 
   tags = {
-    Name = "MainSubnet"
+    Name = "prodxcloud Public Subnet ${count.index + 1}"
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
-resource "aws_internet_gateway" "main_igw" {
-  vpc_id = aws_vpc.main_vpc.id
+# private subnet resources
+resource "aws_subnet" "private_subnets" {
+  count      = length(var.private_subnet_cidrs)
+  vpc_id     = aws_vpc.mindlab-vpc.id
+  cidr_block = element(var.private_subnet_cidrs, count.index)
+  availability_zone = element(var.azs, count.index)
 
   tags = {
-    Name = "MainInternetGateway"
+    Name = "prodxcloud Private Subnet ${count.index + 1}"
+  }
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
-resource "aws_route_table" "main_route_table" {
-  vpc_id = aws_vpc.main_vpc.id
+# Internet gateway
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.mindlab-vpc.id
+
+  tags = {
+    Name = "prodxcloud VPC Internet Gateway"
+  }
+}
+# 2 aws route table route
+resource "aws_route_table" "second_rt" {
+  vpc_id = aws_vpc.mindlab-vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.main_igw.id
+    gateway_id = aws_internet_gateway.gw.id
   }
 
   tags = {
-    Name = "MainRouteTable"
+    Name = "2nd Route Table"
   }
 }
 
-resource "aws_route_table_association" "main_rta" {
-  subnet_id  = aws_subnet.main_subnet.id
-  route_table_id = aws_route_table.main_route_table.id
+# Associate Public Subnets with the Second Route Table
+resource "aws_route_table_association" "public_subnet_asso" {
+  count = length(var.public_subnet_cidrs)
+  subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
+  route_table_id = aws_route_table.second_rt.id
+
+}
+
+output "VPCID" {
+  value = aws_vpc.mindlab-vpc.id
 }

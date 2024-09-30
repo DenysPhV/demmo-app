@@ -24,19 +24,70 @@
         dest: /var/www/frontend/
 
 - hosts: all
-  become: true
+  become: yes
   tasks:
-    - name: Node Exporter
+    - name: Install required packages
       apt:
-        name: node_exporter
+        name: "{{ item }}"
+        update_cache: yes
         state: present
+      with_items:
+        - docker.io
+        - prometheus
+        - grafana
 
-    - name: Prometheus
+    - name: Start and enable Docker
       apt:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull Prometheus Docker image
+      docker_image:
+        name: prom/prometheus
+        source: pull
+
+    - name: Pull Grafana Docker image
+      docker_image:
+        name: grafana/grafana
+        source: pull
+
+    - name: Pull Node Exporter Docker image
+      docker_image:
+        name: prom/node-exporter
+        source: pull
+
+    - name: Create Prometheus config
+      copy:
+        src: templates/prometheus.yml
+        dest: /etc/prometheus/prometheus.yml
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Start Prometheus container
+      docker_container:
         name: prometheus
-        state: present
+        image: prom/prometheus
+        state: started
+        restart_policy: always
+        ports:
+          - "9090:9090"
 
-    - name: Grafana
-      apt:
+    - name: Start Grafana container
+      docker_container:
         name: grafana
-        state: present
+        image: grafana/grafana
+        state: started
+        restart_policy: always
+        ports:
+           - "3000:3000"
+
+    - name: Start Node Exporter container
+      docker_container:
+        name: node_exporter
+        image: prom/node-exporter
+        state: started
+        restart_policy: always
+        ports:
+          - "9100:9100"

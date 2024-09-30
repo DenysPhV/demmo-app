@@ -1,30 +1,23 @@
+# terraform {
+#   backend "s3" {
+#     region  = "eu-west-3"
+#     bucket  = "mindlab-platform-terraform"
+#     key = "infra-mindlab/terraform.tfstate"
+#     dynamodb_table = "mindlab-platform-terraform-tb"
+#     encrypt = false
+#   }
+# }
+
 provider "aws" {
-  region = var.region
-  profile = "default"
-  #noinspection HCLUnknownBlockType
+  region = var.aws_region
+
   default_tags {
     tags = {
       Environment = var.environment_id
-      Role = "${var.environment_name} Networking"
+      Role = "${var.environment_name} State bucket"
       Purpose = var.purpose
     }
   }
 }
 
-resource "aws_instance" "backend_instance" {
-  ami = "ami-12345678"
-  instance_type = "t2.micro"
-}
 
-resource "aws_s3_bucket" "frontend_bucket" {
-  bucket = "frontend-bucket"
-}
-
-# terraform {
-#   backend "s3" {
-#     region = "eu-west-1"
-#     bucket = ""
-#     key = "network/terraform.tfstate"
-#     dynamodb_table = ""
-#   }
-# }

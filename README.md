@@ -11,11 +11,13 @@ demmo-app/
 │
 ├── .github/                     
 │   └── workflows/
-│       ├── backend.yml       
+│       ├── backend.yml 
+│       ├── deploy.yml     
 │       └── frontend.yml
 │
 ├── ansible/
-│   ├── playbook.yml   
+│   ├── playbook.yml
+│   ├── prometheus.yml   
 │   ├── hosts.ini     
 │   └── roles/
 │       ├── backend/

@@ -1,3 +1,13 @@
+# runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+.env
+*.pem
+*.pub
+*.ini
+
 # Local .terraform directories
 **/.terraform/*
 
@@ -36,8 +46,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-.env
-*.pem
 
-*.ini
 
