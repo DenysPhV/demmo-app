@@ -3,22 +3,12 @@
 - hosts: backend
   become: true
   tasks:
-    - name: Add repo Node.js
-      apt_repository:
-        repo: 'deb https://deb.nodesource.com/node_16.x focal main'
-        state: present
-        filename: 'nodesource'
-
-    - name: Update cache APT
-      apt:
-        update_cache: yes
-
-    - name: Install Node.js
+    - name: Встановлюємо Node.js
       apt:
         name: nodejs
         state: present
 
-    - name: copy backend's files
+    - name: Копіюємо файли бекенду
       copy:
         src: ./backend/
         dest: /var/www/backend/
@@ -26,12 +16,12 @@
         group: ubuntu
         mode: '0755'
 
-    - name: Install npm dependencies
+    - name: Встановлюємо npm залежності
       command: npm install
       args:
         chdir: /var/www/backend/
 
-    - name: run backend
-      command: pm2 start npm --name "backend" -- start
+    - name: Запускаємо бекенд
+      command: npm start
       args:
         chdir: /var/www/backend/

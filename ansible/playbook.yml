@@ -1,28 +1,4 @@
 ---
-- hosts: backend
-  become: true
-  tasks:
-    - name: Встановлення Node.js
-      apt:
-        name: nodejs
-        state: present
-    - name: Копіювання файлів бекенду
-      copy:
-        src: ./backend/
-        dest: /var/www/backend/
-
-- hosts: frontend
-  become: true
-  tasks:
-    - name: Встановлення Node.js для React
-      apt:
-        name: nodejs
-        state: present
-    - name: Копіювання файлів фронтенду
-      copy:
-        src: ./frontend/
-        dest: /var/www/frontend/
-
 - hosts: all
   become: yes
   tasks:
@@ -37,7 +13,7 @@
         - grafana
 
     - name: Start and enable Docker
-      apt:
+      service:
         name: docker
         state: started
         enabled: yes
@@ -81,7 +57,7 @@
         state: started
         restart_policy: always
         ports:
-           - "3000:3000"
+          - "3000:3000"
 
     - name: Start Node Exporter container
       docker_container:

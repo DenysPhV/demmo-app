@@ -11,14 +11,13 @@ demmo-app/
 │
 ├── .github/                     
 │   └── workflows/
-│       ├── backend.yml 
-│       ├── deploy.yml     
+│       ├── backend.yml       
 │       └── frontend.yml
 │
 ├── ansible/
-│   ├── playbook.yml
-│   ├── prometheus.yml   
-│   ├── hosts.ini     
+│   ├── playbook.yml   
+│   ├── hosts.ini 
+│   ├── nginx.conf    
 │   └── roles/
 │       ├── backend/
 │       │   └── tasks/main.yml
@@ -31,15 +30,12 @@ demmo-app/
 │   ├── ec2-backend.tf
 │   ├── ec2-frontend.tf
 │   ├── main.tf
-│   ├── network.tf
 │   ├── outputs.tf     
-│   ├── route53.tf
-│   ├── routes.tf
+│   ├── providers.tf 
 │   ├── s3.tf 
-│   ├── security-groups.tf
-│   ├── state_lock_table.tf
-│   ├── variables.tf 
-│   └── versions.tf
+│   └── variables.tf
 │
 └── README.md
 ```
+
+terraform init

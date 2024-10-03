@@ -3,22 +3,12 @@
 - hosts: frontend
   become: true
   tasks:
-    - name: Add repo Node.js
-      apt_repository:
-        repo: 'deb https://deb.nodesource.com/node_16.x focal main'
-        state: present
-        filename: 'nodesource'
-
-    - name: Update cache APT
-      apt:
-        update_cache: yes
-
-    - name: Install Node.js for to building React
+    - name: Встановлюємо Node.js для побудови React
       apt:
         name: nodejs
         state: present
 
-    - name: copy frontend's files
+    - name: Копіюємо файли фронтенду
       copy:
         src: ./frontend/
         dest: /var/www/frontend/
@@ -26,12 +16,12 @@
         group: ubuntu
         mode: '0755'
 
-    - name: Install npm dependencies
+    - name: Встановлюємо npm залежності
       command: npm install
       args:
         chdir: /var/www/frontend/
 
-    - name: Build React app
+    - name: Збираємо React додаток
       command: npm run build
       args:
         chdir: /var/www/frontend/
