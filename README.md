@@ -11,13 +11,16 @@ demmo-app/
 │
 ├── .github/                     
 │   └── workflows/
-│       ├── backend.yml       
+│       ├── backend.yml 
+│       ├── clone-git.yml 
+│       ├── deploy.yml     
 │       └── frontend.yml
 │
 ├── ansible/
 │   ├── playbook.yml   
 │   ├── hosts.ini 
-│   ├── nginx.conf    
+│   ├── nginx.conf
+│   ├── prometheus.yml    
 │   └── roles/
 │       ├── backend/
 │       │   └── tasks/main.yml
@@ -26,14 +29,17 @@ demmo-app/
 │       └── common/
 │           └── tasks/main.yml 
 │ 
-├── terraform-iac/
-│   ├── ec2-backend.tf
-│   ├── ec2-frontend.tf
+├── infrastructure/
 │   ├── main.tf
-│   ├── outputs.tf     
-│   ├── providers.tf 
+│   ├── network.tf
+│   ├── outputs.tf  
+│   ├── route53.tf   
 │   ├── s3.tf 
-│   └── variables.tf
+│   ├── security-groups.tf
+│   ├── state-lock-table.tf
+│   ├── variables.tf
+│   ├── versions.tf
+│   └── vpc.tf
 │
 └── README.md
 ```
