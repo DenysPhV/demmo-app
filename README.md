@@ -30,6 +30,7 @@ demmo-app/
 │           └── tasks/main.yml 
 │ 
 ├── infrastructure/
+│   ├── import.tf
 │   ├── main.tf
 │   ├── network.tf
 │   ├── outputs.tf  
@@ -38,8 +39,7 @@ demmo-app/
 │   ├── security-groups.tf
 │   ├── state-lock-table.tf
 │   ├── variables.tf
-│   ├── versions.tf
-│   └── vpc.tf
+│   └── versions.tf
 │
 └── README.md
 ```

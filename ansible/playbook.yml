@@ -11,6 +11,11 @@
         - docker.io
         - prometheus
         - grafana
+        -
+    - name: Install Node.js
+      apt:
+        name: nodejs
+        state: present
 
     - name: Start and enable Docker
       service:
@@ -67,3 +72,9 @@
         restart_policy: always
         ports:
           - "9100:9100"
+
+    - name: Import Grafana dashboards
+      grafana_dashboard:
+        folder: "My Dashboards"
+        state: present
+        src: /path/to/dashboards/

@@ -1,31 +1,36 @@
-# EC2 інстанс для Node.js (Backend)
-resource "aws_instance" "backend_instance" {
-  ami = "ami-12345678"  # AMI для регіону AWS
-  instance_type = "t2.micro"
-  subnet_id = aws_subnet.main_subnet.id
-  associate_public_ip_address = true
+# create VPC
+resource "aws_vpc" "main_vpc" {
+  cidr_block = var.vpc_cidr
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 
   tags = {
-    Name = "BackendInstance"
+    Name = "${var.environment_name} VPC"
   }
-
-  # Додамо Security Group для дозволу HTTP/HTTPS
-  vpc_security_group_ids = [aws_security_group.allow_http_https.id]
 }
 
-# EC2 інстанс для React (Frontend)
-resource "aws_instance" "frontend_instance" {
-  ami = "ami-12345678"  # AMI для вашого регіону AWS
-  instance_type = "t2.micro"
-  subnet_id = aws_subnet.main_subnet.id
-  associate_public_ip_address = true
+
+# Internet Gateway
+resource "aws_internet_gateway" "main_igw" {
+  vpc_id = aws_vpc.main_vpc.id
 
   tags = {
-    Name = "FrontendInstance"
+    Name = "${var.environment_name} Internet Gateway"
   }
-
-  # Додамо Security Group для дозволу HTTP/HTTPS
-  vpc_security_group_ids = [aws_security_group.allow_http_https.id]
 }
+
+# Subnet
+resource "aws_subnet" "main_subnet" {
+  vpc_id = aws_vpc.main_vpc.id
+  count = length(var.zones)
+  cidr_block = cidrsubnet(var.vpc_cidr, 3, count.index * 2)
+  availability_zone = element(var.zones, count.index)
+
+  tags = {
+    Name = "${var.environment_name} Main subnet"
+  }
+}
+
+
 
 

@@ -1,21 +1,11 @@
 resource "aws_route53_zone" "main_zone" {
-  name = "yourdomain.com"
+  name = var.public_zone_name
+  vpc {
+    vpc_id = aws_vpc.main_vpc.id
+  }
+  tags = {
+    Environment = "${var.environment_name} Private Hosted Zone"
+  }
 }
 
-resource "aws_route53_record" "frontend_record" {
-  zone_id = aws_route53_zone.main_zone.zone_id
-  name    = "www"
-  type    = "A"
-  ttl     = 300
 
-  records = [aws_instance.frontend_instance.public_ip]
-}
-
-resource "aws_route53_record" "backend_record" {
-  zone_id = aws_route53_zone.main_zone.zone_id
-  name    = "api"
-  type    = "A"
-  ttl     = 300
-
-  records = [aws_instance.backend_instance.public_ip]
-}
