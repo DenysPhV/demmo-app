@@ -56,5 +56,7 @@ variable "public_zone_name" {
   description = "Public Hosted Zone Name"
 }
 
+variable "github_url" {}
+
 
 

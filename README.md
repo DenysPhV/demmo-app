@@ -30,6 +30,7 @@ demmo-app/
 │           └── tasks/main.yml 
 │ 
 ├── infrastructure/
+│   ├── ansible.tf
 │   ├── import.tf
 │   ├── main.tf
 │   ├── network.tf
@@ -47,3 +48,5 @@ demmo-app/
 terraform init
 terraform plan -var-file=./terraform_push_dev.tfvars
 terraform init -migrate-state
+terraform apply -var-file=./terraform_push_dev.tfvars
+terraform destroy -var-file=./terraform_push_dev.tfvars
