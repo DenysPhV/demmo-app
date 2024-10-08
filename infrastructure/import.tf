@@ -1,14 +1,3 @@
-data "terraform_remote_state" "network" {
-  backend = "s3"
-  workspace = terraform.workspace
-  config = {
-    bucket = var.state_bucket
-    key = "network/terraform.tfstate"
-    region = var.region
-  }
-}
-
-
 data "aws_ami" "latest_amazon_linux" {
   owners = ["amazon"]
   most_recent = true
@@ -18,6 +7,22 @@ data "aws_ami" "latest_amazon_linux" {
   }
 }
 
-data "aws_route53_zone" "public" {
-  name = var.public_zone_name
+data "aws_iam_policy_document" "allow_access_from_another_account" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["992382781279"]
+    }
+
+    actions = [
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:PutObject"
+    ]
+
+    resources = [
+      aws_s3_bucket.terraform_state.arn,
+      "${aws_s3_bucket.terraform_state.arn}/*",
+    ]
+  }
 }

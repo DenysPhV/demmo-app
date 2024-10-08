@@ -45,3 +45,5 @@ demmo-app/
 ```
 
 terraform init
+terraform plan -var-file=./terraform_push_dev.tfvars
+terraform init -migrate-state

@@ -2,13 +2,14 @@
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.state_bucket
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
   tags = {
     Name = "${var.environment_name} State bucket"
   }
+}
+
+resource "aws_s3_bucket_policy" "react_bucket_policy" {
+  bucket = aws_s3_bucket.terraform_state.id
+  policy = data.aws_iam_policy_document.allow_access_from_another_account.json
 }
 
 resource "aws_s3_bucket_versioning" "terraform_state" {

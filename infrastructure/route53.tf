@@ -4,8 +4,10 @@ resource "aws_route53_zone" "main_zone" {
     vpc_id = aws_vpc.main_vpc.id
   }
   tags = {
-    Environment = "${var.environment_name} Private Hosted Zone"
+    Environment = "${var.environment_name} Public Hosted Zone"
   }
 }
+
+
 
 

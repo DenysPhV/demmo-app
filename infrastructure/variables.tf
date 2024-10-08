@@ -13,12 +13,29 @@ variable "frontend_url" {
   type = string
 }
 
+variable "my_ip" {}
 variable "instance_count" {
-  default = "0"
+  default = "1"
 }
-
 variable "instance_type" {
   default = "t2.micro"
+}
+variable "instance_key_name" {}
+variable "instance_volume_size" {
+  default = "10"
+}
+
+variable "instance_user" {
+  default = "ec2-user"
+}
+variable "instance_key" {
+  default = "/Users/User/.ssh/mindlab_key.pem"
+}
+variable "source_instance_internal_key" {
+  default = "/Users/User/.ssh/mindlab_key.pem"
+}
+variable "destination_instance_internal_key" {
+  default = "/home/ec2-user/.ssh/id_ed25519"
 }
 
 variable "zones" {
