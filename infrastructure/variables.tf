@@ -29,10 +29,10 @@ variable "instance_user" {
   default = "ec2-user"
 }
 variable "instance_key" {
-  default = "/Users/User/.ssh/mindlab_key.pem"
+  default = "C:/Users/User/.ssh/mindlab_key.pem"
 }
 variable "source_instance_internal_key" {
-  default = "/Users/User/.ssh/mindlab_key.pem"
+  default = "C:/Users/User/.ssh/id_ed25519"
 }
 variable "destination_instance_internal_key" {
   default = "/home/ec2-user/.ssh/id_ed25519"
@@ -57,6 +57,9 @@ variable "public_zone_name" {
 }
 
 variable "github_url" {}
+variable "registration_token" {}
+variable "runner_tags_list" {}
+variable "runner_executor" {}
 
 
 
