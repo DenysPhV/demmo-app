@@ -29,13 +29,13 @@ variable "instance_user" {
   default = "ec2-user"
 }
 variable "instance_key" {
-  default = "C:/Users/User/.ssh/mindlab_key.pem"
+  default = "/home/denysfv/.ssh/mindlab_key.pem"
 }
 variable "source_instance_internal_key" {
-  default = "C:/Users/User/.ssh/id_ed25519"
+  default = "/home/denysfv/.ssh/id_mindlab"
 }
 variable "destination_instance_internal_key" {
-  default = "/home/ec2-user/.ssh/id_ed25519"
+  default = "/home/ec2-user/.ssh/id_mindlab"
 }
 
 variable "zones" {

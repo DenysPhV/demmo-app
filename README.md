@@ -15,21 +15,21 @@ demmo-app/
 │       ├── clone-git.yml 
 │       ├── deploy.yml     
 │       └── frontend.yml
-│
-├── ansible/
-│   ├── playbook.yml   
-│   ├── hosts.ini 
-│   ├── nginx.conf
-│   ├── prometheus.yml    
-│   └── roles/
-│       ├── backend/
-│       │   └── tasks/main.yml
-│       ├── frontend/
-│       │   └── tasks/main.yml
-│       └── common/
-│           └── tasks/main.yml 
+│ 
 │ 
 ├── infrastructure/
+│   ├── ansible/
+│   │   ├── playbook.yml   
+│   │   ├── hosts.ini 
+│   │   ├── nginx.conf
+│   │   ├── prometheus.yml    
+│   │   └── roles/
+│   │       ├── backend/
+│   │       │   └── tasks/main.yml
+│   │       ├── frontend/
+│   │       │   └── tasks/main.yml
+│   │       └── common/
+│   │           └── tasks/main.yml
 │   ├── ansible.tf
 │   ├── import.tf
 │   ├── main.tf
@@ -44,9 +44,30 @@ demmo-app/
 │
 └── README.md
 ```
-
+### Installing infrastructure
+```
 terraform init
 terraform plan -var-file=./terraform_push_dev.tfvars
+terraform apply -var-file=./terraform_push_dev.tfvars
+
+ #  uncomment s3 settings in main.tf
 terraform init -migrate-state
 terraform apply -var-file=./terraform_push_dev.tfvars
+```
+start instance
+ssh -i "mindlab_key.pem" ec2-user@ip_instance
+
+sudo systemctl reload nginx
+### Uninstalling infrastructure
+```
+#  to comment s3 settings in main.tf
+terraform init -migrate-state
+after clean s3 bucket
 terraform destroy -var-file=./terraform_push_dev.tfvars
+```
+
+### Nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo systemctl status nginx
+systemctl status nginx

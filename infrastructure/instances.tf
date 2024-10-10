@@ -8,6 +8,7 @@ resource "aws_instance" "backend_instance" {
   associate_public_ip_address = true
   # Security Group for HTTP/HTTPS
   vpc_security_group_ids = [aws_security_group.allow_http_https.id]
+  user_data = file("./templates/user_data.sh")
 
   tags = {
     Name = "${var.environment_id} Backend Instance"
@@ -26,6 +27,7 @@ resource "aws_instance" "frontend_instance" {
   associate_public_ip_address = true
   # Додамо Security Group для дозволу HTTP/HTTPS
   vpc_security_group_ids = [aws_security_group.allow_http_https.id]
+  user_data = file("./templates/user_data.sh")
 
   tags = {
     Name = "${var.environment_id} Frontend Instance"

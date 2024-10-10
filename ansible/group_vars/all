@@ -1,7 +1,0 @@
----
-instance_user: ${instance_user}
-destination_instance_internal_key: ${destination_instance_internal_key}
-github_url: ${github_url}
-registration_token: ${registration_token}
-runner_tags_list: ${runner_tags_list}
-runner_executor: ${runner_executor}

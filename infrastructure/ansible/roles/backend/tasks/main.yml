@@ -1,0 +1,27 @@
+# playbook.yml для Node.js
+---
+- hosts: backend
+  become: true
+  tasks:
+    - name: Встановлюємо Node.js
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Копіюємо файли бекенду
+      copy:
+        src: ./backend/
+        dest: /var/www/backend/
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Встановлюємо npm залежності
+      command: npm install
+      args:
+        chdir: /var/www/backend/
+
+    - name: Запускаємо бекенд
+      command: npm start
+      args:
+        chdir: /var/www/backend/

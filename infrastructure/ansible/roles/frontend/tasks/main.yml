@@ -1,0 +1,27 @@
+# playbook.yml для React
+---
+- hosts: frontend
+  become: true
+  tasks:
+    - name: Встановлюємо Node.js для побудови React
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Копіюємо файли фронтенду
+      copy:
+        src: ./frontend/
+        dest: /var/www/frontend/
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Встановлюємо npm залежності
+      command: npm install
+      args:
+        chdir: /var/www/frontend/
+
+    - name: Збираємо React додаток
+      command: npm run build
+      args:
+        chdir: /var/www/frontend/

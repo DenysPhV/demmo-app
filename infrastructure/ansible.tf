@@ -1,8 +1,8 @@
 resource "null_resource" "ansible_copy" {
   count = var.instance_count
-  depends_on = [aws_instance.frontend_instance, aws_instance.backend_instance]
+  depends_on = [aws_instance.backend_instance, aws_instance.frontend_instance]
   connection {
-    host = aws_instance.backend_instance[count.index].public_ip
+    host = aws_instance.frontend_instance[count.index].public_ip
     type = "ssh"
     user = var.instance_user
     private_key = file(var.instance_key)
@@ -19,30 +19,30 @@ resource "null_resource" "ansible_copy" {
 
   provisioner "file" {
     source = "ansible"
-    destination = ".${var.instance_user}/ansible"
+    destination = "/home/${var.instance_user}/ansible"
   }
 
   provisioner "file" {
-    content     = data.template_file.inventory.rendered
-    destination = ".${var.instance_user}/ansible/inventory"
+    content = data.template_file.inventory.rendered
+    destination = "/home/${var.instance_user}/ansible/inventory"
   }
 
   provisioner "file" {
     content     = data.template_file.group_vars.rendered
-    destination = ".${var.instance_user}/ansible/group_vars/all"
+    destination = "/home/${var.instance_user}/ansible/group_vars/all"
   }
 
 }
 
 data "template_file" "inventory" {
-  template = file(".${path.module}/ansible/inventory")
+  template = file("${path.module}/ansible/inventory")
   vars = {
-    backend_instance = join("\n", aws_instance.backend_instance.*.private_ip)
+    frontend_instance = join("\n", aws_instance.frontend_instance.*.public_ip)
   }
 }
 
 data "template_file" "group_vars" {
-  template = file(".${path.module}/ansible/group_vars/all")
+  template = file("${path.module}/ansible/group_vars/all")
   vars = {
     instance_user = var.instance_user
     destination_instance_internal_key = var.destination_instance_internal_key
