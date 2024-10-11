@@ -44,7 +44,7 @@ demmo-app/
 │
 └── README.md
 ```
-*Installing infrastructure*
+*starting infrastructure on aws*
 - terraform init
 - terraform plan -var-file=./terraform_push_dev.tfvars
 - terraform apply -var-file=./terraform_push_dev.tfvars
@@ -53,19 +53,21 @@ demmo-app/
 - terraform init -migrate-state
 - terraform apply -var-file=./terraform_push_dev.tfvars
 
-*start instance*
-ssh -i "mindlab_key.pem" ec2-user@ip_instance
+*enter to instance*
+ssh -i "mindlab_key.pem" ec2-user@15.237.112.225
 
 ### Uninstalling infrastructure
 *to comment s3 settings in main.tf*
 - terraform init -migrate-state
-- after clean s3 bucket
+*after clean s3 bucket*
 - terraform destroy -var-file=./terraform_push_dev.tfvars
 
 ### Ansible
-- ansible-playbook -i hosts /nginx/tasks/main.yml -e "ssh_private_key_file=file.pem"
+- ansible-playbook -i hosts.ini playbook.yml 
 
 
 ### Nginx
 - sudo systemctl status nginx
 - sudo systemctl reload nginx
+
+

@@ -30,14 +30,14 @@ resource "aws_route_table_association" "main_route_association" {
   route_table_id = aws_route_table.main_route_table.id
 }
 
-# terraform {
-#   backend "s3" {
-#     region = "eu-west-3"
-#     bucket = "mindlab-platform-terraform"
-#     key = "state-bucket/terraform.tfstate"
-#     dynamodb_table = "mindlab-platform-terraform-tb"
-#   }
-# }
+terraform {
+  backend "s3" {
+    region = "eu-west-3"
+    bucket = "mindlab-platform-terraform"
+    key = "state-bucket/terraform.tfstate"
+    dynamodb_table = "mindlab-platform-terraform-tb"
+  }
+}
 
 
 

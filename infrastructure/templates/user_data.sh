@@ -4,8 +4,10 @@ yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/li
 systemctl start amazon-ssm-agent
 amazon-linux-extras enable ansible2
 yum install -y ansible
-sudo amazon-linux-extras install nginx1.12
-sudo systemctl start nginx
-sudo systemctl enable nginx
+#sudo amazon-linux-extras install nginx1.12
+#sudo scp ~/ansible/nginx.conf /etc/nginx/nginx.conf
+#sudo systemctl reload nginx
+#sudo systemctl start nginx
+#sudo systemctl enable nginx
 
 

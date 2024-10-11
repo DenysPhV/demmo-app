@@ -1,82 +1,17 @@
 ---
-- hosts: all
+- hosts: frontend_instance
   become: yes
+  become_method: sudo
+  vars:
+    temp_folder: /tmp
   tasks:
-    - name: Install required packages
-      yum:
-        name: "{{ item }}"
-        update_cache: yes
-        state: present
-        with_items:
-           - docker.io
+    #Install prerequisites
+    - include: tasks/prerequisites.yml
 
-    - name: Install Node.js
-      yum:
-        name: nodejs
-        state: present
+    #Install Nginx
+    - include: tasks/nginx.yml
+    #Install MongoDB
+#    - include: tasks/mongodb.yml
 
-    - name: Start and enable Docker
-      service:
-        name: docker
-        state: started
-        enabled: yes
-
-    - name: Start Node Exporter container
-      docker_container:
-        name: node_exporter
-        image: prom/node-exporter
-        state: started
-        restart_policy: always
-        ports:
-          - "9100:9100"
-
-#    - name: Pull Prometheus Docker image
-#      docker_image:
-#        name: prom/prometheus
-#        source: pull
-
-#    - name: Pull Grafana Docker image
-#      docker_image:
-#        name: grafana/grafana
-#        source: pull
-
-#    - name: Pull Node Exporter Docker image
-#      docker_image:
-#        name: prom/node-exporter
-#        source: pull
-
-#    - name: Create Prometheus config
-#      copy:
-#        src: templates/prometheus.yml
-#        dest: /etc/prometheus/prometheus.yml
-#        owner: root
-#        group: root
-#        mode: 0644
-
-#    - name: Start Prometheus container
-#      docker_container:
-#        name: prometheus
-#        image: prom/prometheus
-#        state: started
-#        restart_policy: always
-#        ports:
-#          - "9090:9090"
-
-#    - name: Start Grafana container
-#      docker_container:
-#        name: grafana
-#        image: grafana/grafana
-#        state: started
-#        restart_policy: always
-#        ports:
-#          - "3000:3000"
-
-
-#    - name: Import Grafana dashboards
-#      grafana_dashboard:
-#        folder: "My Dashboards"
-#        state: present
-#        src: /path/to/dashboards/
-
-
-
+    #Install Node.js
+    - include: tasks/nodejs.yml
