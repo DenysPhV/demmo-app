@@ -3,18 +3,15 @@
   become: yes
   tasks:
     - name: Install required packages
-      apt:
+      yum:
         name: "{{ item }}"
         update_cache: yes
         state: present
-      with_items:
-        - nginx
-        - docker.io
-        - prometheus
-        - grafana
+        with_items:
+           - docker.io
 
     - name: Install Node.js
-      apt:
+      yum:
         name: nodejs
         state: present
 
@@ -23,47 +20,6 @@
         name: docker
         state: started
         enabled: yes
-
-    - name: Pull Prometheus Docker image
-      docker_image:
-        name: prom/prometheus
-        source: pull
-
-    - name: Pull Grafana Docker image
-      docker_image:
-        name: grafana/grafana
-        source: pull
-
-    - name: Pull Node Exporter Docker image
-      docker_image:
-        name: prom/node-exporter
-        source: pull
-
-    - name: Create Prometheus config
-      copy:
-        src: templates/prometheus.yml
-        dest: /etc/prometheus/prometheus.yml
-        owner: root
-        group: root
-        mode: 0644
-
-    - name: Start Prometheus container
-      docker_container:
-        name: prometheus
-        image: prom/prometheus
-        state: started
-        restart_policy: always
-        ports:
-          - "9090:9090"
-
-    - name: Start Grafana container
-      docker_container:
-        name: grafana
-        image: grafana/grafana
-        state: started
-        restart_policy: always
-        ports:
-          - "3000:3000"
 
     - name: Start Node Exporter container
       docker_container:
@@ -74,20 +30,53 @@
         ports:
           - "9100:9100"
 
-    - name: Import Grafana dashboards
-      grafana_dashboard:
-        folder: "My Dashboards"
-        state: present
-        src: /path/to/dashboards/
+#    - name: Pull Prometheus Docker image
+#      docker_image:
+#        name: prom/prometheus
+#        source: pull
 
-- hosts: linux-servers
-  become:
-    true
-  become_method:
-    sudo
-  become_user:
-    root
-  remote_user:
-    ansible
-  roles:
-    - nginx
+#    - name: Pull Grafana Docker image
+#      docker_image:
+#        name: grafana/grafana
+#        source: pull
+
+#    - name: Pull Node Exporter Docker image
+#      docker_image:
+#        name: prom/node-exporter
+#        source: pull
+
+#    - name: Create Prometheus config
+#      copy:
+#        src: templates/prometheus.yml
+#        dest: /etc/prometheus/prometheus.yml
+#        owner: root
+#        group: root
+#        mode: 0644
+
+#    - name: Start Prometheus container
+#      docker_container:
+#        name: prometheus
+#        image: prom/prometheus
+#        state: started
+#        restart_policy: always
+#        ports:
+#          - "9090:9090"
+
+#    - name: Start Grafana container
+#      docker_container:
+#        name: grafana
+#        image: grafana/grafana
+#        state: started
+#        restart_policy: always
+#        ports:
+#          - "3000:3000"
+
+
+#    - name: Import Grafana dashboards
+#      grafana_dashboard:
+#        folder: "My Dashboards"
+#        state: present
+#        src: /path/to/dashboards/
+
+
+

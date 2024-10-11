@@ -9,3 +9,4 @@ output "frontend_url" {
 output "main_subnet_ids" {
   value = aws_subnet.main_subnet.*.id
 }
+

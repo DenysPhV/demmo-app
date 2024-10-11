@@ -44,30 +44,28 @@ demmo-app/
 │
 └── README.md
 ```
-### Installing infrastructure
-```
-terraform init
-terraform plan -var-file=./terraform_push_dev.tfvars
-terraform apply -var-file=./terraform_push_dev.tfvars
+*Installing infrastructure*
+- terraform init
+- terraform plan -var-file=./terraform_push_dev.tfvars
+- terraform apply -var-file=./terraform_push_dev.tfvars
 
- #  uncomment s3 settings in main.tf
-terraform init -migrate-state
-terraform apply -var-file=./terraform_push_dev.tfvars
-```
-start instance
+*uncomment s3 settings in main.tf*
+- terraform init -migrate-state
+- terraform apply -var-file=./terraform_push_dev.tfvars
+
+*start instance*
 ssh -i "mindlab_key.pem" ec2-user@ip_instance
 
-sudo systemctl reload nginx
 ### Uninstalling infrastructure
-```
-#  to comment s3 settings in main.tf
-terraform init -migrate-state
-after clean s3 bucket
-terraform destroy -var-file=./terraform_push_dev.tfvars
-```
+*to comment s3 settings in main.tf*
+- terraform init -migrate-state
+- after clean s3 bucket
+- terraform destroy -var-file=./terraform_push_dev.tfvars
+
+### Ansible
+- ansible-playbook -i hosts /nginx/tasks/main.yml -e "ssh_private_key_file=file.pem"
+
 
 ### Nginx
-sudo systemctl start nginx
-sudo systemctl enable nginx
-sudo systemctl status nginx
-systemctl status nginx
+- sudo systemctl status nginx
+- sudo systemctl reload nginx
