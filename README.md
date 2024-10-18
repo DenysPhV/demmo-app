@@ -49,21 +49,17 @@ demmo-app/
 - terraform plan -var-file=./terraform_push_dev.tfvars
 - terraform apply -var-file=./terraform_push_dev.tfvars
 
-*uncomment s3 settings in main.tf*
-- terraform init -migrate-state
-- terraform apply -var-file=./terraform_push_dev.tfvars
+*entered to instance bastion server, take in console*
+ssh -i "mindlab_key.pem" ec2-user@bastion_server_ip
 
-*enter to instance*
-ssh -i "mindlab_key.pem" ec2-user@15.237.112.225
+*entered to instance ci cd with ip CI CD server, take in console*
+ssh -i "mindlab_key.pem" ec2-user@ci_cd_server_ip
 
-### Uninstalling infrastructure
-*to comment s3 settings in main.tf*
-- terraform init -migrate-state
-*after clean s3 bucket*
+*Uninstalling infrastructure*
 - terraform destroy -var-file=./terraform_push_dev.tfvars
 
 ### Ansible
-- ansible-playbook -i hosts.ini playbook.yml 
+- ansible-playbook -i inventory playbook.yml 
 
 
 ### Nginx

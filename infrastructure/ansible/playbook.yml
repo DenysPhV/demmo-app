@@ -1,17 +1,16 @@
 ---
-- hosts: frontend_instance
-  become: yes
-  become_method: sudo
-  vars:
-    temp_folder: /tmp
-  tasks:
-    #Install prerequisites
-    - include: tasks/prerequisites.yml
+- hosts: localhost
+  become: true
+  roles:
+    - common
 
-    #Install Nginx
-    - include: tasks/nginx.yml
-    #Install MongoDB
-#    - include: tasks/mongodb.yml
+- hosts: ci_cd_server_ip
+  become: true
+  roles:
+    - common
+    - docker
+    - nodejs
+    - nginx
+    - tfenv
+    - cd_ansible
 
-    #Install Node.js
-    - include: tasks/nodejs.yml

@@ -1,0 +1,32 @@
+---
+- name: Update apt repo and cache
+  yum: update_cache=yes force_apt_get=yes cache_valid_time=3600 # Update apt repository and cache
+
+- name: Install nodejs and npm
+  yum:                        # Install Node.js and NPM
+    pkg:
+      - nodejs
+      - npm
+
+# Deploy nodejs app
+#- name: unpack the nodejs file
+#  unarchive:                  # Unpack the Node.js app
+#    src:
+#    dest: /home/arun
+#
+#- name: Install dependencies
+#  npm:                        # Install app dependencies
+#    path: /home/arun/packages
+#
+#- name: Start the application
+#  command:                    # Start the Node.js app
+#      chdir: /home/arun/packages/app
+#      cmd: node server
+#  async: 1000                 # Run the command asynchronously
+#  poll: 0                     # Do not wait for the command to finish
+#
+#- name: Ensure app is running
+#  shell: ps aux | grep node   # Check if the app is running
+#  register: app_status        # Register the output of the command as a variable
+#
+#- debug: msg={{app_status.stdout_lines}} # Print the output of the previous task for debugging purposes

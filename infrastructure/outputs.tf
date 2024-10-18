@@ -10,10 +10,10 @@ output "main_subnet_ids" {
   value = aws_subnet.main_subnet.*.id
 }
 
-output "frontend_server_ip" {
-  value = aws_instance.frontend_instance.*.public_ip
+output "bastion_server_ip" {
+  value = aws_instance.bastion.*.public_ip
 }
 
-output "backend_server_ip" {
-  value = aws_instance.backend_instance.*.public_ip
+output "ci_cd_server_ip" {
+  value = aws_instance.ci_cd.*.public_ip
 }

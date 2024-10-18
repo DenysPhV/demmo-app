@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="77c6c4fc-5d27-4cc3-8b60-ace14c5c9b73" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/cd_ansible/files/ansible/ansible.cfg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/cd_ansible/files/ansible/cd_backend.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/cd_ansible/files/ansible/cd_frontend.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/cd_ansible/files/ansible/ec2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/cd_ansible/files/ansible/group_vars/all" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/cd_ansible/files/ansible/roles/cd_backend/tasks/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/cd_ansible/files/ansible/roles/cd_frontend/tasks/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/cd_ansible/tasks/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/docker/tasks/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/docker/vars/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/nginx/tasks/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/nodejs/tasks/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/tfenv/defaults/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/tfenv/tasks/main.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible.tf" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/ansible.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/inventory" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/ansible/inventory" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/playbook.yml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/ansible/playbook.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/roles/backend/tasks/main.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/roles/common/tasks/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/ansible/roles/common/tasks/main.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/roles/frontend/tasks/main.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/secrets" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/ansible/ansible.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/tasks/nginx.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/tasks/nodejs.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/ansible/tasks/prerequisites.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/instances.tf" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/instances.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/outputs.tf" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/outputs.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/templates/user_data.sh" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/templates/user_data.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/variables.tf" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2nbupxJu4p7EqZdgmklLd1MQ39S" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/DEVOPS/DevOpsCurses",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="77c6c4fc-5d27-4cc3-8b60-ace14c5c9b73" name="Changes" comment="" />
+      <created>1729254284075</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729254284075</updated>
+      <workItem from="1729254284839" duration="38000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

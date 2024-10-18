@@ -1,8 +1,8 @@
 resource "null_resource" "ansible_copy" {
   count = var.instance_count
-  depends_on = [aws_instance.backend_instance, aws_instance.frontend_instance]
+  depends_on = [aws_instance.ci_cd, aws_instance.bastion]
   connection {
-    host = aws_instance.frontend_instance[count.index].public_ip
+    host = aws_instance.bastion[count.index].public_ip
     type = "ssh"
     user = var.instance_user
     private_key = file(var.instance_key)
@@ -37,7 +37,7 @@ resource "null_resource" "ansible_copy" {
 data "template_file" "inventory" {
   template = file("${path.module}/ansible/inventory")
   vars = {
-    frontend_instance = join("\n", aws_instance.frontend_instance.*.public_ip)
+    ci_cd_server_ip = join("\n", aws_instance.ci_cd.*.public_ip)
   }
 }
 

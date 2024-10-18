@@ -1,0 +1,16 @@
+---
+- name: install and check nginx latest version
+  become: yes
+  yum:
+    update_cache: yes
+    name: nginx
+    state: latest
+
+- name: start nginx
+  service:
+    shell: systemctl start nginx
+
+- name: Enable nginx starting from Boot Process
+  service:
+      name: nginx
+      enabled: yes
