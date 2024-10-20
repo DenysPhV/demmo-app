@@ -27,7 +27,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -var-file=./terraform_push_dev.tfvars -auto-approve
+        run: terraform plan -auto-approve -var-file=./terraform_push_dev.tfvars
 
       - name: Install Ansible
         shell: bash
