@@ -1,4 +1,3 @@
-# EC2 Frontend
 resource "aws_instance" "bastion" {
   ami = data.aws_ami.latest_amazon_linux.id
   instance_type = var.instance_type
@@ -15,8 +14,6 @@ resource "aws_instance" "bastion" {
   }
 }
 
-
-# EC2 for Node.js (Backend)
 resource "aws_instance" "ci_cd" {
   ami = data.aws_ami.latest_amazon_linux.id
   instance_type = var.second_instance_type
