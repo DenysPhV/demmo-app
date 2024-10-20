@@ -18,10 +18,10 @@ variable "instance_count" {
   default = "1"
 }
 variable "instance_type" {
-  default = "t2.large"
+  default = "t2.micro"
 }
 variable "second_instance_type" {
-  default = "t2.medium"
+  default = "t2.micro"
 }
 variable "instance_key_name" {}
 variable "instance_volume_size" {
@@ -59,10 +59,18 @@ variable "public_zone_name" {
   description = "Public Hosted Zone Name"
 }
 
-variable "github_url" {}
-variable "registration_token" {}
-variable "runner_tags_list" {}
-variable "runner_executor" {}
+variable "github_url" {
+  default = "https://github.com/"
+}
+variable "registration_token" {
+  default = ""
+}
+variable "runner_tags_list" {
+  default = "frontend, backend"
+}
+variable "runner_executor" {
+  default = "shell"
+}
 
 
 
